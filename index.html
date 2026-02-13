@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💌 For Pachy 💌</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --hot-pink: #ff1493;
+      --magenta: #ff00aa;
+      --baby-pink: #ffb6c1;
+      --red: #ff0055;
+      --yellow: #ffee00;
+      --cyan: #00ffff;
+      --lime: #00ff88;
+      --white: #fff;
+      --dark: #1a0010;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+      background: var(--dark);
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E💕%3C/text%3E%3C/svg%3E"), auto;
+    }
+
+    /* SCROLLING STAR BACKGROUND */
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--baby-pink);
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* SCROLLING MARQUEE TOP */
+    .marquee-wrap {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--hot-pink);
+      border-bottom: 4px solid var(--yellow);
+      padding: 6px 0;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 12s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: var(--yellow);
+      letter-spacing: 2px;
+      padding: 0 2rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* MARQUEE BOTTOM */
+    .marquee-bottom {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--hot-pink);
+      border-top: 4px solid var(--yellow);
+      padding: 6px 0;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .marquee-bottom .marquee-track {
+      animation: marquee 10s linear infinite reverse;
+    }
+    .marquee-bottom .marquee-track span { color: var(--cyan); }
+
+    /* FLOATING HEARTS */
+    .heart-float {
+      position: fixed;
+      font-size: 1.5rem;
+      animation: floatUp linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* MAIN CARD */
+    #main-card {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 80px 1rem;
+      text-align: center;
+    }
+
+    /* PIXELATED BORDER FRAME */
+    .card-inner {
+      background: linear-gradient(135deg, #2d0020 0%, #1a0030 50%, #2d0020 100%);
+      border: 6px solid var(--hot-pink);
+      box-shadow:
+        0 0 0 3px var(--yellow),
+        0 0 0 6px var(--hot-pink),
+        0 0 40px rgba(255,20,147,0.6),
+        inset 0 0 30px rgba(255,20,147,0.1);
+      border-radius: 4px;
+      padding: 2.5rem 3rem;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* CORNER DECORATIONS */
+    .card-inner::before,
+    .card-inner::after {
+      content: '💖';
+      position: absolute;
+      font-size: 1.8rem;
+      animation: cornerPulse 1.5s ease-in-out infinite alternate;
+    }
+    .card-inner::before { top: -18px; left: -18px; }
+    .card-inner::after { bottom: -18px; right: -18px; }
+
+    @keyframes cornerPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.3); }
+    }
+
+    /* GIF-LIKE BEAR */
+    .bear-wrap {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      animation: bearBounce 0.6s ease-in-out infinite alternate;
+      display: block;
+      line-height: 1;
+    }
+    @keyframes bearBounce {
+      0% { transform: translateY(0) rotate(-5deg); }
+      100% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    /* TITLE */
+    .title-from {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 0 var(--dark);
+    }
+
+    .title-name {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      color: var(--hot-pink);
+      text-shadow:
+        3px 3px 0 var(--red),
+        6px 6px 0 rgba(255,20,147,0.3),
+        0 0 20px rgba(255,20,147,0.8);
+      margin-bottom: 1rem;
+      animation: nameGlow 2s ease-in-out infinite alternate;
+    }
+    @keyframes nameGlow {
+      0% { text-shadow: 3px 3px 0 var(--red), 0 0 20px rgba(255,20,147,0.8); }
+      100% { text-shadow: 3px 3px 0 var(--red), 0 0 40px rgba(255,20,147,1), 0 0 60px rgba(255,0,170,0.5); }
+    }
+
+    .question {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.65rem, 2.5vw, 0.9rem);
+      color: var(--baby-pink);
+      line-height: 2;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 0 var(--dark);
+    }
+    .question span {
+      color: var(--yellow);
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* HEARTS ROW */
+    .hearts-row {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      animation: heartRowPulse 1s ease-in-out infinite alternate;
+      letter-spacing: 4px;
+    }
+    @keyframes heartRowPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+
+    /* BUTTONS */
+    .btn-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+      position: relative;
+      min-height: 80px;
+    }
+
+    .btn-yes {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.9rem, 3vw, 1.3rem);
+      background: linear-gradient(180deg, #ff69b4 0%, #ff1493 50%, #c0006e 100%);
+      color: var(--white);
+      border: 4px solid var(--white);
+      box-shadow:
+        4px 4px 0 var(--dark),
+        0 0 20px rgba(255,20,147,0.7);
+      padding: 1rem 2.5rem;
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 var(--dark);
+      transition: transform 0.1s, box-shadow 0.1s;
+      border-radius: 4px;
+      animation: yesPulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes yesPulse {
+      0% { box-shadow: 4px 4px 0 var(--dark), 0 0 20px rgba(255,20,147,0.7); }
+      100% { box-shadow: 4px 4px 0 var(--dark), 0 0 40px rgba(255,20,147,1), 0 0 60px rgba(255,0,170,0.5); }
+    }
+    .btn-yes:hover {
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 6px 6px 0 var(--dark), 0 0 50px rgba(255,20,147,1);
+    }
+    .btn-yes:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: 2px 2px 0 var(--dark);
+    }
+
+    .btn-no {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      background: linear-gradient(180deg, #444 0%, #222 100%);
+      color: #aaa;
+      border: 2px solid #666;
+      box-shadow: 2px 2px 0 #000;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      position: absolute;
+      transition: none;
+      user-select: none;
+    }
+
+    /* CELEBRATION SCREEN */
+    #celebration {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(ellipse at center, #2d0020 0%, #000 100%);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    #celebration.show { display: flex; }
+
+    .celeb-emoji {
+      font-size: 5rem;
+      animation: celebBounce 0.5s ease-in-out infinite alternate;
+      margin-bottom: 1rem;
+    }
+    @keyframes celebBounce {
+      0% { transform: scale(1) rotate(-5deg); }
+      100% { transform: scale(1.15) rotate(5deg); }
+    }
+
+    .celeb-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 8vw, 4rem);
+      color: var(--hot-pink);
+      text-shadow: 3px 3px 0 var(--red), 0 0 30px rgba(255,20,147,1);
+      margin-bottom: 1rem;
+      animation: nameGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    .celeb-date {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(0.55rem, 2vw, 0.8rem);
+      color: var(--yellow);
+      text-shadow: 2px 2px 0 var(--dark);
+      line-height: 2.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .celeb-sub {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      color: var(--cyan);
+      letter-spacing: 2px;
+      animation: blink 1.2s step-end infinite;
+    }
+
+    /* FIREWORKS CANVAS */
+    #fireworks-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+    }
+
+    /* PIXEL DIVIDER */
+    .pixel-divider {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 1rem 0;
+    }
+    .pixel-divider span {
+      width: 8px;
+      height: 8px;
+      background: var(--hot-pink);
+      display: inline-block;
+      animation: pixelPop 0.8s ease-in-out infinite alternate;
+    }
+    .pixel-divider span:nth-child(2) { animation-delay: 0.1s; background: var(--yellow); }
+    .pixel-divider span:nth-child(3) { animation-delay: 0.2s; background: var(--cyan); }
+    .pixel-divider span:nth-child(4) { animation-delay: 0.3s; background: var(--hot-pink); }
+    .pixel-divider span:nth-child(5) { animation-delay: 0.4s; background: var(--yellow); }
+    @keyframes pixelPop {
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(2); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      .card-inner { padding: 2rem 1.5rem; }
+      .btn-yes { padding: 0.8rem 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- STARS BACKGROUND -->
+<div class="stars" id="stars"></div>
+
+<!-- TOP MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>💕 HAPPY VALENTINES DAY 💕 BE MINE 💕 AMOR 💕 XO XO 💕 FOREVER 💕 HAPPY VALENTINES DAY 💕 BE MINE 💕 AMOR 💕 XO XO 💕 FOREVER 💕</span>
+    <span>💕 HAPPY VALENTINES DAY 💕 BE MINE 💕 AMOR 💕 XO XO 💕 FOREVER 💕 HAPPY VALENTINES DAY 💕 BE MINE 💕 AMOR 💕 XO XO 💕 FOREVER 💕</span>
+  </div>
+</div>
+
+<!-- BOTTOM MARQUEE -->
+<div class="marquee-bottom">
+  <div class="marquee-track">
+    <span>🌹 FEBRUARY 14 2026 🌹 7:30 PM 🌹 MY BABY 🌹 YOU ARE MY EVERYTHING 🌹 FEBRUARY 14 2026 🌹 7:30 PM 🌹 MY BABY 🌹 YOU ARE MY EVERYTHING 🌹</span>
+    <span>🌹 FEBRUARY 14 2026 🌹 7:30 PM 🌹 MY BABY 🌹 YOU ARE MY EVERYTHING 🌹 FEBRUARY 14 2026 🌹 7:30 PM 🌹 MY BABY 🌹 YOU ARE MY EVERYTHING 🌹</span>
+  </div>
+</div>
+
+<!-- MAIN CARD -->
+<div id="main-card">
+  <div class="card-inner">
+
+    <span class="bear-wrap">🐻</span>
+
+    <div class="title-from">* a special message for *</div>
+
+    <div class="title-name">Pachy 💖</div>
+
+    <div class="pixel-divider">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="hearts-row">💗 💓 💗 💓 💗 💓 💗</div>
+
+    <div class="question">
+      Will you be<br/>
+      my Valentine<span>?</span>
+    </div>
+
+    <div class="btn-wrap" id="btn-wrap">
+      <button class="btn-yes" onclick="sayYes()">💝 YES! 💝</button>
+      <button class="btn-no" id="btn-no" onmouseover="runAway()" ontouchstart="runAway()">no...</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FIREWORKS CANVAS -->
+<canvas id="fireworks-canvas"></canvas>
+
+<!-- CELEBRATION SCREEN -->
+<div id="celebration">
+  <div class="celeb-emoji">🎉💖🎉</div>
+  <div class="celeb-title">See You Soon!</div>
+  <div class="pixel-divider">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="celeb-date">
+    📅 February 14, 2026<br/>
+    ⏰ 7:30 PM<br/>
+    💝 My Baby 💝
+  </div>
+  <div class="celeb-sub">* i cannot wait to see you *</div>
+</div>
+
+<script>
+  // ── GENERATE STARS ──
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 3 + 's';
+    s.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    const size = 1 + Math.random() * 3;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    starsContainer.appendChild(s);
+  }
+
+  // ── FLOATING HEARTS ──
+  const heartChars = ['💕', '💖', '💗', '💓', '💘', '🌹', '✨'];
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart-float';
+    h.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.fontSize = (0.8 + Math.random() * 1.5) + 'rem';
+    const dur = 5 + Math.random() * 6;
+    h.style.animationDuration = dur + 's';
+    h.style.animationDelay = '0s';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), dur * 1000);
+  }
+  setInterval(spawnHeart, 600);
+
+  // ── RUNAWAY NO BUTTON ──
+  const noBtn = document.getElementById('btn-no');
+  const btnWrap = document.getElementById('btn-wrap');
+  let noMoves = 0;
+
+  function runAway() {
+    noMoves++;
+    const ww = window.innerWidth;
+    const wh = window.innerHeight;
+    const btnW = noBtn.offsetWidth;
+    const btnH = noBtn.offsetHeight;
+
+    const maxX = ww - btnW - 20;
+    const maxY = wh - btnH - 60;
+
+    const newX = Math.floor(Math.random() * maxX);
+    const newY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+    noBtn.style.zIndex = '9990';
+
+    // Shrink the button each time
+    if (noMoves > 3) {
+      const newSize = Math.max(0.3, 0.5 - noMoves * 0.02);
+      noBtn.style.fontSize = newSize + 'rem';
+    }
+  }
+
+  // ── FIREWORKS ──
+  const canvas = document.getElementById('fireworks-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animRunning = false;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function randomColor() {
+    const colors = ['#ff1493','#ff69b4','#ffee00','#00ffff','#ff0055','#ff00aa','#00ff88','#ffffff','#ffb6c1','#ff4500'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function launchFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height * 0.6;
+    const count = 80 + Math.floor(Math.random() * 60);
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 / count) * i;
+      const speed = 2 + Math.random() * 6;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        color: randomColor(),
+        size: 2 + Math.random() * 3,
+        decay: 0.012 + Math.random() * 0.01,
+        gravity: 0.08
+      });
+    }
+  }
+
+  function animateFireworks() {
+    if (!animRunning) return;
+    ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    particles = particles.filter(p => p.alpha > 0.01);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += p.gravity;
+      p.vx *= 0.98;
+      p.alpha -= p.decay;
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(animateFireworks);
+  }
+
+  // ── SAY YES ──
+  function sayYes() {
+    // Hide main card
+    document.getElementById('main-card').style.display = 'none';
+    noBtn.style.display = 'none';
+
+    // Show celebration
+    const cel = document.getElementById('celebration');
+    cel.classList.add('show');
+
+    // Start fireworks
+    animRunning = true;
+    resizeCanvas();
+    animateFireworks();
+
+    // Launch fireworks repeatedly
+    let count = 0;
+    const interval = setInterval(() => {
+      launchFirework();
+      launchFirework();
+      count++;
+      if (count > 40) clearInterval(interval);
+    }, 300);
+
+    // Spawn hearts faster
+    for (let i = 0; i < 20; i++) {
+      setTimeout(spawnHeart, i * 100);
+    }
+  }
+</script>
+</body>
+</html>
